@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-wam13d*w-jhs^3t!_jk7bq#k0#rrs@+j#iu92fq-6-x*8ha@)#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").split(",")
 ALLOWED_HOSTS += ['localhost', '127.0.0.1']
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ADD THIS
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -117,16 +118,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-] 
+]
 
 # Email Setup
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = '587'
 EMAIL_HOST_USER = 'villanbilly70@gmail.com'
-EMAIL_HOST_PASSWORD = 'stgnwcmnapstgktb'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
 # Default primary key field type
