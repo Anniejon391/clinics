@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-wam13d*w-jhs^3t!_jk7bq#k0#rrs@+j#iu92fq-6-x*8ha@)#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['clinics-yan2.onrender.com']
+ALLOWED_HOSTS = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").split(",")
+ALLOWED_HOSTS += ['localhost', '127.0.0.1']
 
 
 # Application definition
